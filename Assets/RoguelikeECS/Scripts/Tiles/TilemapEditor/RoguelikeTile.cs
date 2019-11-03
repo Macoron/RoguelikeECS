@@ -7,5 +7,7 @@ namespace Roguelike.ScriptableObjects
 {
     public class RoguelikeTile : Tile
     {
+        [Header("Custom fields")]
+        public bool isObstacle;
     }
 }

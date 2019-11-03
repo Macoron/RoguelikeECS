@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovementSystem : ComponentSystem
@@ -11,19 +12,42 @@ public class PlayerMovementSystem : ComponentSystem
         
         Entities.ForEach<PlayerComponent, GridPos>((ref PlayerComponent player, ref GridPos pos) =>
         {
-            var curPos = pos.Value;
+            var newPos = pos.Value;
             
             if (input.upPressed)
-                curPos.y++;
+                newPos.y++;
             if (input.downPressed)
-                curPos.y--;
+                newPos.y--;
 
             if (input.leftPressed)
-                curPos.x--;
+                newPos.x--;
             if (input.rightPressed)
-                curPos.x++;
+                newPos.x++;
 
-            pos.Value = curPos;
+            if (IsValidPos(newPos))
+            {
+                pos.Value = newPos;
+            }
+            
+
         });
+    }
+
+    private bool IsValidPos(int2 newPos)
+    {
+        var gridEntities = new List<TilemapComponent>();
+        EntityManager.GetAllUniqueSharedComponentData<TilemapComponent>(gridEntities);
+
+        foreach (var tilemap in gridEntities)
+        {
+            if (tilemap.Value.TotalSize == 0)
+                continue;;
+
+            var entityTile = tilemap.Value[newPos];
+            var isObstacle = EntityManager.HasComponent<ObstacleComponent>(entityTile);
+            return !isObstacle;
+        }
+
+        return false;
     }
 }
