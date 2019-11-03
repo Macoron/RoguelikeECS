@@ -75,6 +75,16 @@ public struct NativeArray2D<T> : IEnumerable<T>, System.IDisposable where T : st
         array.Dispose();
     }
 
+    public bool InBounds(int2 pos)
+    {
+        return InBounds(pos.x, pos.y);
+    }
+    public bool InBounds(int x, int y)
+    {
+        return (x >= gridOrigin.x && x < gridOrigin.x + N 
+                                  && y >= gridOrigin.y && y < gridOrigin.y + M);
+    }
+    
     public IEnumerator<T> GetEnumerator()
     {
         return array.GetEnumerator();

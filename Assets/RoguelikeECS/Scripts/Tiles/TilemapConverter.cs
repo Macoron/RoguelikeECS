@@ -27,8 +27,9 @@ public class TilemapConverter : MonoBehaviour, IConvertGameObjectToEntity
         for (int x = tilemapOrigin.x; x < tilemapSize.x + tilemapOrigin.x; x++)
         for (int y = tilemapOrigin.y; y < tilemapSize.y + tilemapOrigin.y; y++)
         {
-            // Setup pose
             var pos = new int2(x, y);
+            
+            // Setup pose
             var e = entityGrid[pos];
             dstManager.SetComponentData(e, new GridPos() { Value = pos });
             

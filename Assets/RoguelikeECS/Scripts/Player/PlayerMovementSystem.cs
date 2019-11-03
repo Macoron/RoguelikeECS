@@ -43,6 +43,9 @@ public class PlayerMovementSystem : ComponentSystem
             if (tilemap.Value.TotalSize == 0)
                 continue;;
 
+            if (!tilemap.Value.InBounds(newPos))
+                return false;
+            
             var entityTile = tilemap.Value[newPos];
             var isObstacle = EntityManager.HasComponent<ObstacleComponent>(entityTile);
             return !isObstacle;
