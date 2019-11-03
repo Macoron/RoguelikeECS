@@ -85,7 +85,7 @@ TextureImporter:
     second: colored_26
   - first:
       213: 8430408805966826615
-    second: colored_27
+    second: skeleton_01
   - first:
       213: 4084788230369057549
     second: colored_28
@@ -3761,7 +3761,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: colored_27
+      name: skeleton_01
       rect:
         serializedVersion: 2
         x: 459

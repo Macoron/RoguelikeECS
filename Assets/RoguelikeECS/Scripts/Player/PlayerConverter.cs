@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerConverter : MonoBehaviour, IConvertGameObjectToEntity
 {
     public Grid grid;
+    public float maxHealth = 100f;
     
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
@@ -20,5 +21,8 @@ public class PlayerConverter : MonoBehaviour, IConvertGameObjectToEntity
         });
         
         dstManager.AddComponentData(entity, default(CopyTransformToGameObject));
+        
+        // Player need health
+        dstManager.AddComponentData(entity, new HealthComponent() {health = maxHealth});
     }
 }

@@ -28,8 +28,6 @@ public class PlayerMovementSystem : ComponentSystem
             {
                 pos.Value = newPos;
             }
-            
-
         });
     }
 
