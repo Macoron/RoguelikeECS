@@ -14,14 +14,14 @@ public class PlayerMovementSystem : ComponentSystem
             var curPos = pos.Value;
             
             if (input.upPressed)
-                curPos.x++;
+                curPos.y++;
             if (input.downPressed)
-                curPos.x--;
+                curPos.y--;
 
             if (input.leftPressed)
-                curPos.y--;
+                curPos.x--;
             if (input.rightPressed)
-                curPos.y++;
+                curPos.x++;
 
             pos.Value = curPos;
         });

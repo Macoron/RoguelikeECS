@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 public class PlayerConverter : MonoBehaviour, IConvertGameObjectToEntity
@@ -17,5 +18,7 @@ public class PlayerConverter : MonoBehaviour, IConvertGameObjectToEntity
         {
             Value = new int2(worldPos.x, worldPos.y)
         });
+        
+        dstManager.AddComponentData(entity, default(CopyTransformToGameObject));
     }
 }

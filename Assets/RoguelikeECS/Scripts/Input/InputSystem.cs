@@ -19,10 +19,10 @@ public class InputSystem : ComponentSystem
         // simple WASD controls
         SetSingleton(new InputComponent()
         {
-            upPressed = Input.GetKey(KeyCode.W),
-            downPressed = Input.GetKey(KeyCode.S),
-            leftPressed = Input.GetKey(KeyCode.A),
-            rightPressed = Input.GetKey(KeyCode.D)
+            upPressed = Input.GetKeyDown(KeyCode.W),
+            downPressed = Input.GetKeyDown(KeyCode.S),
+            leftPressed = Input.GetKeyDown(KeyCode.A),
+            rightPressed = Input.GetKeyDown(KeyCode.D)
         });
         
     }
