@@ -10,7 +10,7 @@ public class PlayerMovementSystem : ComponentSystem
     {
         var input = GetSingleton<InputComponent>();
         
-        Entities.ForEach<PlayerComponent>((Entity e, ref PlayerComponent player) =>
+        Entities.ForEach((Entity e, ref PlayerComponent player) =>
         {
             var direction = new int2();
             
@@ -27,11 +27,14 @@ public class PlayerMovementSystem : ComponentSystem
             if (direction.x != 0 || direction.y != 0)
             {
                 var newIntent = PostUpdateCommands.CreateEntity();
-                PostUpdateCommands.AddComponent<MoveIntentComponent>(newIntent, new MoveIntentComponent()
+                PostUpdateCommands.AddComponent(newIntent, new MoveIntentComponent()
                 {
                     target = e,
                     direction = direction
                 });
+
+                // We made a move, now need to update game
+                TickedController.MakeTick();
             }
         });
     }

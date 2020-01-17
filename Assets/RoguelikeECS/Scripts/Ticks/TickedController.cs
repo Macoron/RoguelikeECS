@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class TickedController
 {
-    private static List<ITickable> allTickable = new List<ITickable>();
-    public static List<ITickable> AllTickable { get => allTickable; }
+    public static List<ITickable> AllTickable { get; } = new List<ITickable>();
 
     public static void RegisterTickable(ITickable tickable)
     {
-        allTickable.Add(tickable);
+        AllTickable.Add(tickable);
     }
 
-    public static void Tick()
+    public static void MakeTick()
     {
-        foreach (var tickable in allTickable)
-            tickable.OnTick();
+        foreach (var tickable in AllTickable)
+            tickable.OnTickRecived();
     }
 
 }

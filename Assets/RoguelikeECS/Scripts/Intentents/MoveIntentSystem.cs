@@ -4,9 +4,9 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class MoveIntentSystem : ComponentSystem
+public class MoveIntentSystem : TickedComponentSystem
 {
-    protected override void OnUpdate()
+    protected override void OnTick()
     {
         Entities.ForEach((Entity intent, ref MoveIntentComponent movement) =>
         {
@@ -26,6 +26,7 @@ public class MoveIntentSystem : ComponentSystem
             PostUpdateCommands.DestroyEntity(intent);
         });
     }
+
 
     private bool IsValidPos(int2 newPos)
     {
