@@ -10,45 +10,31 @@ public class PlayerMovementSystem : ComponentSystem
     {
         var input = GetSingleton<InputComponent>();
         
-        Entities.ForEach<PlayerComponent, GridPos>((ref PlayerComponent player, ref GridPos pos) =>
+        Entities.ForEach<PlayerComponent>((Entity e, ref PlayerComponent player) =>
         {
-            var newPos = pos.Value;
+            var direction = new int2();
             
             if (input.upPressed)
-                newPos.y++;
+                direction.y++;
             if (input.downPressed)
-                newPos.y--;
+                direction.y--;
 
             if (input.leftPressed)
-                newPos.x--;
+                direction.x--;
             if (input.rightPressed)
-                newPos.x++;
+                direction.x++;
 
-            if (IsValidPos(newPos))
+            if (direction.x != 0 || direction.y != 0)
             {
-                pos.Value = newPos;
+                var newIntent = PostUpdateCommands.CreateEntity();
+                PostUpdateCommands.AddComponent<MoveIntentComponent>(newIntent, new MoveIntentComponent()
+                {
+                    target = e,
+                    direction = direction
+                });
             }
         });
     }
 
-    private bool IsValidPos(int2 newPos)
-    {
-        var gridEntities = new List<TilemapComponent>();
-        EntityManager.GetAllUniqueSharedComponentData<TilemapComponent>(gridEntities);
 
-        foreach (var tilemap in gridEntities)
-        {
-            if (tilemap.Value.TotalSize == 0)
-                continue;;
-
-            if (!tilemap.Value.InBounds(newPos))
-                return false;
-            
-            var entityTile = tilemap.Value[newPos];
-            var isObstacle = EntityManager.HasComponent<ObstacleComponent>(entityTile);
-            return !isObstacle;
-        }
-
-        return false;
-    }
 }
