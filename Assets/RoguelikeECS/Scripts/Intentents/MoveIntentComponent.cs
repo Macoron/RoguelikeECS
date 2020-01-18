@@ -7,5 +7,5 @@ using UnityEngine;
 public struct MoveIntentComponent : IComponentData
 {
     public Entity target;
-    public int2 direction;
+    public Direction direction;
 }

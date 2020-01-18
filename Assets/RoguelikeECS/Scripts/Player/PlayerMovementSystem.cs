@@ -12,19 +12,19 @@ public class PlayerMovementSystem : ComponentSystem
         
         Entities.ForEach((Entity e, ref PlayerComponent player) =>
         {
-            var direction = new int2();
-            
+            var direction = Direction.NONE;
+
             if (input.upPressed)
-                direction.y++;
+                direction |= Direction.NORD;
             if (input.downPressed)
-                direction.y--;
+                direction |= Direction.SOUTH;
 
             if (input.leftPressed)
-                direction.x--;
+                direction |= Direction.WEST;
             if (input.rightPressed)
-                direction.x++;
+                direction |= Direction.EAST;
 
-            if (direction.x != 0 || direction.y != 0)
+            if (direction != Direction.NONE)
             {
                 var newIntent = PostUpdateCommands.CreateEntity();
                 PostUpdateCommands.AddComponent(newIntent, new MoveIntentComponent()

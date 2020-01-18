@@ -14,7 +14,7 @@ public class MoveIntentSystem : TickedComponentSystem
             if (allGridPos.HasComponent(movement.target))
             {
                 var curGridPos = allGridPos[movement.target];
-                curGridPos.Value += movement.direction;
+                curGridPos.Value += movement.direction.ToInt2();
 
                 if (IsValidPos(curGridPos.Value))
                 {
