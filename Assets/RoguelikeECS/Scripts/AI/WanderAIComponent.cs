@@ -5,4 +5,5 @@ using UnityEngine;
 
 public struct WanderAIComponent : IComponentData
 {
+    public Direction lastDirection;
 }

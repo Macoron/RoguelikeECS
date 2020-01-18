@@ -16,7 +16,7 @@ public class MoveIntentSystem : TickedComponentSystem
                 var curGridPos = allGridPos[movement.target];
                 curGridPos.Value += movement.direction.ToInt2();
 
-                if (IsValidPos(curGridPos.Value))
+                if (TilemapUtils.IsValidPos(curGridPos.Value, EntityManager))
                 {
                     PostUpdateCommands.SetComponent(movement.target, curGridPos);
                 }
@@ -28,24 +28,5 @@ public class MoveIntentSystem : TickedComponentSystem
     }
 
 
-    private bool IsValidPos(int2 newPos)
-    {
-        var gridEntities = new List<TilemapComponent>();
-        EntityManager.GetAllUniqueSharedComponentData<TilemapComponent>(gridEntities);
 
-        foreach (var tilemap in gridEntities)
-        {
-            if (tilemap.Value.TotalSize == 0)
-                continue;
-
-            if (!tilemap.Value.InBounds(newPos))
-                return false;
-
-            var entityTile = tilemap.Value[newPos];
-            var isObstacle = EntityManager.HasComponent<ObstacleComponent>(entityTile);
-            return !isObstacle;
-        }
-
-        return false;
-    }
 }
