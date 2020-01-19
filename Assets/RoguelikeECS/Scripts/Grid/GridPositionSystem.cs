@@ -7,15 +7,15 @@ using UnityEngine;
 public class GridPositionSystem : ComponentSystem
 {
     private Grid gridBehaviour;
-    
-    protected override void OnCreate()
-    {
-        base.OnCreate();
-        gridBehaviour = GameObject.FindObjectOfType<Grid>();
-    }
 
     protected override void OnUpdate()
     {
+        if (!gridBehaviour)
+            gridBehaviour = GameObject.FindObjectOfType<Grid>();
+
+        if (!gridBehaviour)
+            return;
+
         Entities.ForEach<GridPos, Translation>((ref GridPos gridPos, ref Translation worldPos) =>
         {
             var newPos = gridPos.Value;
