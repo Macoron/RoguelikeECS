@@ -8,9 +8,8 @@ public class InputSystem : ComponentSystem
     protected override void OnCreate()
     {
         base.OnCreate();
-        
-        // Init singleton for input
-        EntityManager.CreateEntity(typeof(InputComponent));
+
+        EntityManager.CreateEntity(typeof(PersistentComponent), typeof(InputComponent));
         SetSingleton(new InputComponent());
     }
 

@@ -8,6 +8,9 @@ public class PlayerMovementSystem : ComponentSystem
 {
     protected override void OnUpdate()
     {
+        if (!HasSingleton<InputComponent>())
+            return;
+
         var input = GetSingleton<InputComponent>();
         
         Entities.ForEach((Entity e, ref PlayerComponent player) =>

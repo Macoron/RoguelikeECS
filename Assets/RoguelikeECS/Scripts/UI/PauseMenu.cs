@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     private void OnExitGamePressed()
     {
-        SceneControl.DestroyScene();
+        SceneControl.DestroyCurrentScene();
         SceneManager.LoadScene("MainMenu");
     }
 
