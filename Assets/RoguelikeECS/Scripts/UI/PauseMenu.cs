@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     private void OnExitGamePressed()
     {
+        SceneControl.DestroyScene();
         SceneManager.LoadScene("MainMenu");
     }
 

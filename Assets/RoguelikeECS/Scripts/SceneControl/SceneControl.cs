@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-public class SceneControl : ComponentSystem
+public class SceneControl
 {
-    public void DestroyScene()
+    public static void DestroyScene()
     {
-        EntityManager.DestroyEntity(EntityManager.UniversalQuery);
+        var manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        manager.DestroyEntity(manager.UniversalQuery);
     }
 }
