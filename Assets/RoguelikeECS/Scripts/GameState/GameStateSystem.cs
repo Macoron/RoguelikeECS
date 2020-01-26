@@ -5,6 +5,7 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Unity.Mathematics.math;
 
 [UpdateInGroup(typeof(AfterMovementUpdateGroup))]
@@ -49,13 +50,14 @@ public class GameStateSystem : TickedComponentSystem
                 break;
         }
 
-        if (playerWin)
-            Debug.Log("You win!");
-
         players.Dispose();
         flags.Dispose();
 
-
+        if (playerWin)
+        {
+            SceneControl.DestroyCurrentScene();
+            SceneManager.LoadScene("MainMenu");
+        }
 
         /*Entities.ForEach((ref PlayerComponent player, ref GridPos playerPos) =>
         {
