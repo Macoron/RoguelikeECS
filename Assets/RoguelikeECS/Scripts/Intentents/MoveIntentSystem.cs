@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
+[UpdateInGroup(typeof(MovementUpdateGroup))]
 public class MoveIntentSystem : TickedComponentSystem
 {
     protected override void OnTick()

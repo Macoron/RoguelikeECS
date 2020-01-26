@@ -823,7 +823,7 @@ TextureImporter:
     second: colored_272
   - first:
       213: -1350718556188446140
-    second: colored_273
+    second: flag_01
   - first:
       213: 8593574355502874660
     second: colored_274
@@ -8927,7 +8927,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: colored_273
+      name: flag_01
       rect:
         serializedVersion: 2
         x: 289
